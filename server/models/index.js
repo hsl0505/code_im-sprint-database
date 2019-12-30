@@ -2,64 +2,97 @@
 /* eslint-disable no-console */
 var { db } = require("../db");
 
-// console.log(db.getMessages());
+// console.log(db);
 module.exports = {
   messages: {
-    get: async function(callback) {
-      // await db.connect();
-      await db.query("SELECT * FROM messages", (err, results, field) => {
+    get: function(callback) {
+      // db.connect(err => {
+      // if (err) {
+      //   throw err;
+      // }
+      let temp = "SELECT * FROM messages";
+      db.query(temp, (err, results, field) => {
         if (err) {
           callback(err, null);
+          // db.end();
         } else {
           callback(null, JSON.stringify(results));
+          // db.end();
         }
       });
+      // });
+
       // db.on("error", err => console.log(err)); // ???
-      await db.end();
     }, // a function which produces all the messages
-    post: async function(message) {
-      // await db.connect();
+    post: function(message) {
+      // db.connect(err => {
+      //   if (err) {
+      //     throw err;
+      //   }
       // console.log(message);
-      await db.query(
-        `INSERT INTO messages(username, message, roomname) values('${message.username}','${message.message}','${message.roomname}')`,
-        (err, results, field) => {
-          if (err) {
-            throw err;
-          }
+      let a = message.username;
+      let b = "";
+      if (message.message.includes("'")) {
+        b =
+          message.message.slice(0, message.message.indexOf("'")) +
+          "\\" +
+          message.message.slice(message.message.indexOf("'"));
+      }
+      // console.log(b);
+      let c = message.roomname;
+      let temp = `insert into messages(username, message, roomname) values('${a}', '${b}', '${c}')`;
+      // let temp = "insert into messages(username, message, roomname) values(" + message.username +
+      // console.log(temp);
+      db.query(temp, (err, results, field) => {
+        if (err) {
+          console.log(err);
+          // db.end();
         }
-      );
+      });
+      // });
+      // console.log(message);
+
       // db.on("error", err => console.log(err)); /// ???
-      await db.end();
     } // a function which can be used to insert a message into the database
   },
 
   users: {
     // Ditto as above.
-    get: async function(callback) {
-      // await db.connect();
-      await db.query("SELECT * FROM users", (err, results, field) => {
+    get: function(callback) {
+      // db.connect(err => {
+      //   if (err) {
+      //     throw err;
+      //   }
+      let temp = "SELECT * FROM users";
+      db.query(temp, (err, results, field) => {
         if (err) {
           callback(err, null);
+          // db.end();
         } else {
           callback(null, JSON.stringify(results));
+          // db.end();
         }
       });
+      // });
+
       // db.on("error", err => console.log(err)); // ???
-      await db.end();
     },
-    post: async function(message) {
-      // await db.connect();
-      // console.log(message);
-      await db.query(
-        `INSERT INTO users(username) values('${message.username}')`,
-        (err, results, field) => {
-          if (err) {
-            throw err;
-          }
+    post: function(message) {
+      // db.connect(err => {
+      //   if (err) {
+      //     throw err;
+      //   }
+      let temp = `INSERT INTO users(username) values('${message.username}')`;
+      db.query(temp, (err, results, field) => {
+        if (err) {
+          console.log(err);
+          // db.end();
         }
-      );
+      });
+      // });
+      // console.log(message);
+
       // db.on("error", err => console.log(err)); /// ???
-      await db.end();
     }
   }
 };

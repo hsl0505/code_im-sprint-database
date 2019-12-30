@@ -54,7 +54,7 @@ describe("Sprint-database", () => {
 
               // TODO: You might have to change this test to get all the data from
               // your message table, since this is schema-dependent.
-              var queryString = "SELECT * FROM messages";
+              var queryString = "select * from messages";
               var queryArgs = [];
 
               dbConnection.query(queryString, queryArgs, function(
@@ -78,7 +78,8 @@ describe("Sprint-database", () => {
 
     it("Should output all messages from the DB", function(done) {
       // Let's insert a message into the db
-      var queryString = "";
+      var queryString =
+        "insert into messages(username, message, roomname) values('a', 'Men like you can never change!', 'main')";
       var queryArgs = [];
       // TODO - The exact query string and query args to use
       // here depend on the schema you design, so I'll leave
