@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 /* You'll need to have MySQL running and your Node server running
  * for these tests to pass. */
 
@@ -37,6 +38,7 @@ describe("Sprint-database", () => {
           json: { username: "Valjean" }
         },
         function() {
+          console.log("1");
           // Post a message to the node chat server:
           request(
             {
@@ -49,7 +51,7 @@ describe("Sprint-database", () => {
               }
             },
             function() {
-              // console.log(body);
+              console.log("2");
               // Now if we look in the database, we should find the
               // posted message there.
 
@@ -62,7 +64,7 @@ describe("Sprint-database", () => {
                 err,
                 results
               ) {
-                // console.log(results);
+                console.log("3");
                 // Should have one result:
                 expect(results.length).to.equal(1);
 
