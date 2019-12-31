@@ -49,18 +49,20 @@ describe("Sprint-database", () => {
               }
             },
             function() {
+              // console.log(body);
               // Now if we look in the database, we should find the
               // posted message there.
 
               // TODO: You might have to change this test to get all the data from
               // your message table, since this is schema-dependent.
-              var queryString = "select * from messages";
+              var queryString = "SELECT * FROM messages";
               var queryArgs = [];
 
               dbConnection.query(queryString, queryArgs, function(
                 err,
                 results
               ) {
+                // console.log(results);
                 // Should have one result:
                 expect(results.length).to.equal(1);
 
@@ -79,8 +81,8 @@ describe("Sprint-database", () => {
     it("Should output all messages from the DB", function(done) {
       // Let's insert a message into the db
       var queryString =
-        "insert into messages(username, message, roomname) values('a', 'Men like you can never change!', 'main')";
-      var queryArgs = [];
+        "insert into messages(username, message, roomname) values(?, ?, ?)";
+      var queryArgs = ["hs", "Men like you can never change!", "main"];
       // TODO - The exact query string and query args to use
       // here depend on the schema you design, so I'll leave
       // them up to you. */

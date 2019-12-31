@@ -31,19 +31,23 @@ module.exports = {
       //   }
       // console.log(message);
       let a = message.username;
-      let b = "";
-      if (message.message.includes("'")) {
-        b =
-          message.message.slice(0, message.message.indexOf("'")) +
-          "\\" +
-          message.message.slice(message.message.indexOf("'"));
-      }
-      // console.log(b);
+      let b = message.message;
+      // if (message.message.includes("'")) {
+      //   b =
+      //     message.message.slice(0, message.message.indexOf("'")) +
+      //     "'" +
+      //     message.message.slice(message.message.indexOf("'"));
+      // } else {
+      //   b = message.message;
+      // }
+
       let c = message.roomname;
-      let temp = `insert into messages(username, message, roomname) values('${a}', '${b}', '${c}')`;
-      // let temp = "insert into messages(username, message, roomname) values(" + message.username +
-      // console.log(temp);
-      db.query(temp, (err, results, field) => {
+
+      let temp =
+        "insert into messages(username, message, roomname) values(?, ?, ?)";
+
+      db.query(temp, [a, b, c], (err, results, field) => {
+        // console.log(temp);
         if (err) {
           console.log(err);
           // db.end();
