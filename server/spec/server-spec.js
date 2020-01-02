@@ -3,6 +3,7 @@
  * for these tests to pass. */
 
 const mysql = require("mysql");
+// const Sequelize = require("sequelize");
 const request = require("request"); // You might need to npm install the request module!
 const expect = require("chai").expect;
 
@@ -11,6 +12,10 @@ describe("Sprint-database", () => {
     var dbConnection;
 
     beforeEach(function(done) {
+      // let sequelize = new Sequelize("chat", "root", "", {
+      //   host: "localhost",
+      //   dialect: "mysql"
+      // });
       dbConnection = mysql.createConnection({
         user: "root",
         password: "",
@@ -38,7 +43,6 @@ describe("Sprint-database", () => {
           json: { username: "Valjean" }
         },
         function() {
-          console.log("1");
           // Post a message to the node chat server:
           request(
             {
@@ -51,7 +55,6 @@ describe("Sprint-database", () => {
               }
             },
             function() {
-              console.log("2");
               // Now if we look in the database, we should find the
               // posted message there.
 
@@ -83,8 +86,8 @@ describe("Sprint-database", () => {
     it("Should output all messages from the DB", function(done) {
       // Let's insert a message into the db
       var queryString =
-        "insert into messages(username, message, roomname) values(?, ?, ?)";
-      var queryArgs = ["hs", "Men like you can never change!", "main"];
+        "insert into messages(username, message, roomname, createdAt, updatedAt) values(?, ?, ?, ?, ?)";
+      var queryArgs = ['hs', 'Men like you can never change!', 'main', '2020-01-02 02:55:02', '2020-01-02 02:55:02'];
       // TODO - The exact query string and query args to use
       // here depend on the schema you design, so I'll leave
       // them up to you. */

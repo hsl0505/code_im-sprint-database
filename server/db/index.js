@@ -34,9 +34,13 @@ let Messages = sequelize.define("messages", {
   roomname: Sequelize.STRING
 });
 
+Messages.sync();
+
 let Users = sequelize.define("users", {
   username: Sequelize.STRING
 });
+
+Users.sync();
 
 module.exports = {
   // db: sequelize,
