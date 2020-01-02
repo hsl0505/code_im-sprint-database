@@ -28,15 +28,27 @@ sequelize
     console.error("Unable to connect to the database:", err);
   });
 
-let Messages = sequelize.define("messages", {
-  username: Sequelize.STRING,
-  message: Sequelize.STRING,
-  roomname: Sequelize.STRING
-});
+let Messages = sequelize.define(
+  "messages",
+  {
+    username: Sequelize.STRING,
+    message: Sequelize.STRING,
+    roomname: Sequelize.STRING
+  },
+  {
+    timestamps: true
+  }
+);
 
-let Users = sequelize.define("users", {
-  username: Sequelize.STRING
-});
+let Users = sequelize.define(
+  "users",
+  {
+    username: Sequelize.STRING
+  },
+  {
+    timestamps: true
+  }
+);
 
 module.exports = {
   // db: sequelize,
