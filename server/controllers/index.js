@@ -1,7 +1,12 @@
 /* eslint-disable no-unused-vars */
 var models = require("../models");
-
-models.messages.get();
+// models.messages
+// .post({
+//   username: "e",
+//   message: "i",
+//   roomname: "m"
+// })
+// .then(data => console.log(data));
 
 module.exports = {
   messages: {
